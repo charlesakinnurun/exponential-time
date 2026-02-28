@@ -111,9 +111,13 @@ Exponential‑time algorithms are usually **very slow**, especially for larger i
 -->
 
 
-# 📘 Exponential Time – README
+<!-- # 📘 Exponential Time – README -->
 
-## 🔎 Overview
+
+
+<h1 align="center">Exponential Time</h1>
+
+## Overview
 
 **Exponential Time** refers to an algorithm whose runtime grows proportional to a constant raised to the power of the input size.
 
