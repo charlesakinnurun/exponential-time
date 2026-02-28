@@ -1,4 +1,4 @@
-# Exponential‑Time
+<!-- # Exponential‑Time
 
 **Explanation of Exponential Time Complexity (O(2ⁿ))**
 
@@ -108,3 +108,151 @@ if __name__ == "__main__":
 ## 🧠 Why It Matters
 
 Exponential‑time algorithms are usually **very slow**, especially for larger inputs, because their running time increases much faster than linear, polynomial, or logarithmic algorithms. While exponential algorithms **might work for small inputs** or in educational examples, they are generally **not practical at scale**.
+-->
+
+
+# 📘 Exponential Time – README
+
+## 🔎 Overview
+
+**Exponential Time** refers to an algorithm whose runtime grows proportional to a constant raised to the power of the input size.
+
+If the input size increases by 1, the running time doubles (or more).
+
+In algorithm analysis, this is expressed as:
+
+```
+O(2ⁿ)
+```
+
+Exponential time algorithms become very slow very quickly as input size grows.
+
+<a href="/src/main.py">Check for source code</a>
+
+---
+
+## ⚙️ What Exponential Time Means
+
+An algorithm runs in exponential time when it explores all possible combinations or subsets of input elements.
+
+Common examples:
+
+* Generating all subsets of a set (power set)
+* Solving the traveling salesman problem by brute force
+* Recursive solutions without memoization for Fibonacci numbers
+
+For an input of n elements, the runtime is roughly proportional to 2ⁿ.
+
+
+
+---
+
+## 🧠 Python Examples
+
+### Example 1 — Generating All Subsets (Power Set)
+
+```python id="exp_subsets1"
+def generate_subsets(arr):
+    if not arr:
+        return [[]]
+    subsets = generate_subsets(arr[1:])
+    return subsets + [[arr[0]] + s for s in subsets]
+
+arr = [1, 2, 3]
+print(generate_subsets(arr))
+# Output: [[], [3], [2], [2, 3], [1], [1, 3], [1, 2], [1, 2, 3]]
+```
+
+Each element doubles the number of subsets → O(2ⁿ).
+
+---
+
+### Example 2 — Brute-Force Fibonacci (Recursive)
+
+```python id="exp_fib2"
+def fib(n):
+    if n <= 1:
+        return n
+    return fib(n-1) + fib(n-2)
+
+print(fib(5))  # Output: 5
+```
+
+Recursive calls grow exponentially → O(2ⁿ).
+
+---
+
+### Example 3 — Traveling Salesman Problem (Brute Force)
+
+```python
+from itertools import permutations
+
+def tsp_bruteforce(distances):
+    n = len(distances)
+    min_path = None
+    min_cost = float('inf')
+
+    for perm in permutations(range(n)):
+        cost = sum(distances[perm[i]][perm[i+1]] for i in range(n-1))
+        if cost < min_cost:
+            min_cost = cost
+            min_path = perm
+
+    return min_path, min_cost
+
+distances = [
+    [0, 1, 3],
+    [1, 0, 2],
+    [3, 2, 0]
+]
+
+print(tsp_bruteforce(distances))
+```
+
+Checking all n! permutations → roughly O(2ⁿ) in brute-force sense for combinatorial growth.
+
+---
+
+## ⏱️ Time Complexity Comparison
+
+| Complexity | Meaning           |
+| ---------- | ----------------- |
+| O(1)       | Constant time     |
+| O(log n)   | Logarithmic time  |
+| O(n)       | Linear time       |
+| O(n log n) | Linearithmic time |
+| O(n²)      | Quadratic time    |
+| **O(2ⁿ)**  | Exponential time  |
+
+Exponential algorithms quickly become impractical for large inputs.
+
+---
+
+## 👍 Advantages
+
+* Can solve problems exactly
+* Useful for exhaustive search or combinatorial problems
+* Conceptually simple for brute-force approaches
+
+## 👎 Disadvantages
+
+* Extremely slow for moderate or large inputs
+* Not scalable
+* Requires careful optimization or approximation to be practical
+
+---
+
+## 📌 When Exponential Time Occurs
+
+Exponential time operations appear in:
+
+* Recursive combinatorial problems
+* Brute-force searches over all subsets or permutations
+* Certain NP-complete problems without optimization
+
+---
+
+## 🏁 Summary
+
+Exponential time complexity O(2ⁿ) grows extremely fast as input size increases.
+While often unavoidable in brute-force or combinatorial algorithms, these algorithms are usually impractical for large datasets and often require optimized approaches like dynamic programming or approximation.
